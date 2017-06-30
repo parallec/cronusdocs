@@ -1,4 +1,0 @@
-cronusdocs
-==========
-
-cronus documentation

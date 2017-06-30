@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Agent API List &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Agent Configuration" href="agent_configurations.html" />
+    <link rel="prev" title="Security Best Practice" href="security_best_practice.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="agent_configurations.html" title="Agent Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="security_best_practice.html" title="Security Best Practice"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Cronus Agent</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="agent-api-list">
+<h1>Agent API List<a class="headerlink" href="#agent-api-list" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>“GET /services/” : list all services</li>
+<li>“GET /services” : list all services</li>
+<li>“POST /services/{service}” : create service</li>
+<li>“DELETE /services/{service}” : delete service</li>
+<li>“GET /services/{service}” : list manifests of service</li>
+<li>“GET /services/{service}/action/log” : view service log</li>
+<li>“POST /services/{service}/action/updatemetadata” : set service metadata</li>
+<li>“GET /services/{service}/action/getmetadata” : get service metadata as json</li>
+<li>“GET /services/{service}/action/getmetadataprops” : get service metadata as property format</li>
+<li>“GET /services/{service}/action/listpackages” : list all packages of the service</li>
+<li>“POST /services/{service}/manifests/{manifest}” : create manifest</li>
+<li>“DELETE /services/{service}/manifests/{manifest}” : delete manifest</li>
+<li>“GET /services/{service}/manifests/{manifest}” : list all manifests</li>
+<li>“GET /services/{service}/manifests/{manifest}/action/log” : view manifest log</li>
+<li>“POST /services/{service}/manifests/{manifest}/action/activate” : activate manifest</li>
+<li>“POST /services/dist/startdownload” : download cronus package</li>
+<li>“POST /services/dist/validatepackage” : validate md5sum of cronus package against its prop file</li>
+<li>“GET /services/dist/listpackages” : list all packages</li>
+<li>“POST /services/dist/uploadpackage” : upload a cronus package</li>
+<li>“DELETE /services/dist/{package}” : delete a package</li>
+<li>“GET /status/{uuid}” : get status of a job (from job uuid)</li>
+<li>“DELETE /status/{uuid}” : cancel a job (from job uuid)</li>
+<li>“GET /status/uuidoutput/{uuid}” : get raw logs of a job (from job uuid)</li>
+<li>“GET /status/guidoutput/{guid}” : get raw logs of a job (from pass in guid)</li>
+<li>“GET /agent/logs” : view agent logs</li>
+<li>“GET /agent/logs/{fileName}” : view one agent log file</li>
+<li>“GET /agent” : view agent ValidateInternals page</li>
+<li>“GET /agent/ValidateInternals” : agent ValidateInternals in json format</li>
+<li>“GET /agent/ValidateInternals.html” : agent ValidateInternals html page</li>
+<li>“GET /agent/agenthealth” : agent health information in json format</li>
+<li>“GET /agent/monitors” : agent run monitoring value snapshot</li>
+<li>“GET /agent/threads” : agent thread information in json format</li>
+<li>“POST /services/{service}/action/restart” : restart service</li>
+<li>“POST /services/{service}/action/reset” : reset current active manifest (shutdown, deactivate, activate, startup)</li>
+<li>“POST /services/{service}/action/startup” : startup service</li>
+<li>“POST /services/{service}/action/shutdown” : shutdown service</li>
+<li>“POST /services/{service}/useraction/{useraction}” : run user provide script</li>
+<li>“POST /services/{service}/action/deactivatemanifest” : deactivate current active manifest</li>
+<li>“POST /services/{service}/action/deploy” : deploy a service, create service, manifest and activate</li>
+<li>“POST /services/{service}/action/rollback” : rollback a service to last activated version</li>
+<li>“DELETE /services/{service}/action/cleanup” : delete everything of a service</li>
+<li>“POST /agent/cleanup” : delete all services except agent from the host</li>
+<li>“POST /agent/shutdown” : shutdown agent</li>
+<li>“POST /agent/safeshutdown” : shutdown agent when agent is idle (no activity)</li>
+<li>“POST /agent/selfupdate” : upgrade agent</li>
+<li>“DELETE /agent/selfupdate” : cancel an agent upgrade</li>
+<li>“GET /agent/config” : get agent config</li>
+<li>“POST /agent/config” : override agent config</li>
+<li>“DELETE /agent/config” : delete an agent config override</li>
+<li>“POST /agent/cleanproc” : cleanup all cronusapp processes</li>
+<li>“GET /agent/api” : list this agent API</li>
+<li>“POST /agent/gc” : ondemand agent GC</li>
+<li>“GET /agent/servicesinfo” : list all services and everything of the services</li>
+<li>“GET /agent/modules” : get list of agent modules</li>
+<li>“GET /agent/modules/{module}” : get information of a agent module</li>
+<li>“POST /agent/modules/{module}” : create an agent module</li>
+<li>“DELETE /agent/modules/{module}” : delete an agent module</li>
+<li>“POST /admin/executeScript” : execute script</li>
+<li>“POST /admin/executeCmd” : execute a shell command</li>
+<li>“GET /security/listkeys” : list PKI keys</li>
+<li>“POST /security/key/{key}” : create PKI key</li>
+<li>“DELETE /security/key/{key}” : delete PKI key</li>
+<li>“POST security/validatetoken” : validate an existing token</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="security_best_practice.html"
+                        title="previous chapter">Security Best Practice</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="agent_configurations.html"
+                        title="next chapter">Agent Configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cronusagent/agent_api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="agent_configurations.html" title="Agent Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="security_best_practice.html" title="Security Best Practice"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Cronus Agent</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

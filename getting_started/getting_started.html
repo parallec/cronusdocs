@@ -1,0 +1,136 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>Steps to install Cronus agent and Cronus master on a machine.</p>
+<p><strong>Prerequisites</strong></p>
+<ul class="simple">
+<li>linux (Ubuntu, Cent, Redhat, Fedora etc.)</li>
+<li>sudo permission</li>
+<li>python &gt; 2.6.7 &amp;&amp; &lt; 3</li>
+<li>openssl &gt; 0.9.8</li>
+<li>wget</li>
+<li>system management daemon systemd or upstart</li>
+<li>java runtime &gt;= 1.5 (for CronusMaster only)</li>
+</ul>
+<p><strong>Install Agent and Master</strong></p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># Prepare GCE centos7 VM</span>
+sudo yum install wget
+
+<span class="c1"># Prepare EC2 ubuntu14 VM</span>
+sudo apt-get install git
+
+<span class="nb">cd</span> ~
+wget -qO- <span class="s1">&#39;http://www.stackscaling.com/downloads/install_cronusmaster&#39;</span> <span class="p">|</span> bash
+git clone https://github.com/stackscaling/cronusmaster.git
+</pre></div>
+</div>
+<p>expected outcome:</p>
+<ul class="simple">
+<li>CronusAgent is running at <a class="reference external" href="https://host:19000/agent">https://host:19000/agent</a></li>
+<li>CronusMaster is running at <a class="reference external" href="http://host:9000">http://host:9000</a></li>
+<li>CronusMaster code is downloaded and saved in ~/cronusmaster-master</li>
+</ul>
+</div></blockquote>
+<p><strong>Deploy First App</strong></p>
+<blockquote>
+<div>In CronusMaster, navigate to Commands -&gt; Oneclick Launch, run deploy_pyserver_local, wait for it complete, check application running at <a class="reference external" href="http://host:8999">http://host:8999</a></div></blockquote>
+<p><strong>Install Agent Only</strong></p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> /tmp
+wget -qO- <span class="s1">&#39;http://www.stackscaling.com/downloads/install_agent&#39;</span> <span class="p">|</span> sudo <span class="nv">dev</span><span class="o">=</span><span class="nb">true</span> bash
+</pre></div>
+</div>
+<p>expected outcome:</p>
+<ul class="simple">
+<li>CronusAgent is running at <a class="reference external" href="https://localhost:19000/agent">https://localhost:19000/agent</a></li>
+</ul>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/getting_started/getting_started.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

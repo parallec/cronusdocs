@@ -1,0 +1,197 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Command Template &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Command" href="manage_command.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="manage_command.html" title="Command"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Cronus Master</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="command-template">
+<h1>Command Template<a class="headerlink" href="#command-template" title="Permalink to this headline">¶</a></h1>
+<p>Command template is a complete HTTP(S) request in json format with replaceable variables</p>
+<p><strong>Sample synchronous HTTP request</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;SAMPLE_SYNC_COMMAND&quot;</span><span class="p">,</span>                              <span class="c1">// unique name of the command</span>
+ <span class="s2">&quot;category&quot;</span> <span class="o">:</span> <span class="s2">&quot;sample&quot;</span><span class="p">,</span>                                       <span class="c1">// optional category name for grouping</span>
+ <span class="s2">&quot;httpTaskRequest&quot;</span> <span class="o">:</span> <span class="p">{</span>
+   <span class="s2">&quot;taskType&quot;</span> <span class="o">:</span> <span class="s2">&quot;async&quot;</span><span class="p">,</span>                                      <span class="c1">// this is a http request with response</span>
+   <span class="s2">&quot;httpClientType&quot;</span> <span class="o">:</span> <span class="s2">&quot;httpClient&quot;</span><span class="p">,</span>                           <span class="c1">// type of http client to use</span>
+   <span class="s2">&quot;executionOption&quot;</span> <span class="o">:</span> <span class="p">{</span>                                      <span class="c1">// below are options for sending request</span>
+     <span class="s2">&quot;timeOutSec&quot;</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>                                        <span class="c1">// time out in second</span>
+     <span class="s2">&quot;initDelaySec&quot;</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>                                      <span class="c1">// initial delay in second</span>
+     <span class="s2">&quot;maxRetry&quot;</span> <span class="o">:</span> <span class="mi">3</span><span class="p">,</span>                                          <span class="c1">// total # of retry on failure</span>
+     <span class="s2">&quot;retryDelaySec&quot;</span> <span class="o">:</span> <span class="mi">0</span>                                      <span class="c1">// delay before retry</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;urlTemplate&quot;</span> <span class="o">:</span> <span class="p">{</span>                                          <span class="c1">// http request template</span>
+     <span class="s2">&quot;url&quot;</span> <span class="o">:</span> <span class="s2">&quot;https://&lt;host&gt;:19000/services/&lt;serviceName&gt;&quot;</span><span class="p">,</span>   <span class="c1">// url</span>
+     <span class="s2">&quot;method&quot;</span> <span class="o">:</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span>                                       <span class="c1">// http method</span>
+     <span class="s2">&quot;body&quot;</span> <span class="o">:</span> <span class="p">{},</span>                                             <span class="c1">// http body</span>
+     <span class="s2">&quot;headers&quot;</span> <span class="o">:</span> <span class="p">{</span>
+       <span class="s2">&quot;content-type&quot;</span> <span class="o">:</span> <span class="s2">&quot;application/json&quot;</span>                    <span class="c1">// http headers</span>
+     <span class="p">},</span>
+     <span class="s2">&quot;parameters&quot;</span> <span class="o">:</span> <span class="p">{}</span>                                        <span class="c1">// query string parameters</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;resProcessorName&quot;</span> <span class="o">:</span> <span class="s2">&quot;agentProcessor&quot;</span>                      <span class="c1">// bean for processing http response</span>
+ <span class="p">},</span>
+ <span class="s2">&quot;userData&quot;</span> <span class="o">:</span> <span class="p">{</span>                                               <span class="c1">// user provided data to launch command Job</span>
+  <span class="s2">&quot;serviceName&quot;</span> <span class="o">:</span> <span class="s2">&quot;myservice&quot;</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Sample asynchronous HTTP request with polling for result</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;SAMPLE_ASYNCPOLL_COMMAND&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;category&quot;</span> <span class="o">:</span> <span class="s2">&quot;sample&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;httpTaskRequest&quot;</span> <span class="o">:</span> <span class="p">{</span>
+   <span class="s2">&quot;taskType&quot;</span> <span class="o">:</span> <span class="s2">&quot;asyncpoll&quot;</span><span class="p">,</span>                              <span class="c1">// this is a request followed by polling</span>
+   <span class="s2">&quot;httpClientType&quot;</span> <span class="o">:</span> <span class="s2">&quot;httpClient&quot;</span><span class="p">,</span>
+   <span class="p">...</span>                                                    <span class="c1">// same url template as above for request</span>
+   <span class="s2">&quot;monitorOption&quot;</span> <span class="o">:</span> <span class="p">{</span>                                    <span class="c1">// options for polling</span>
+     <span class="s2">&quot;timeOutSec&quot;</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="s2">&quot;initDelaySec&quot;</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="s2">&quot;maxRetry&quot;</span> <span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+     <span class="s2">&quot;retryDelaySec&quot;</span> <span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="s2">&quot;intervalSec&quot;</span> <span class="o">:</span> <span class="mi">10</span>                                   <span class="c1">// polling interval in second</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;pollTemplate&quot;</span> <span class="o">:</span> <span class="p">{</span>                                     <span class="c1">// http polling template</span>
+     <span class="s2">&quot;url&quot;</span> <span class="o">:</span> <span class="s2">&quot;https://&lt;host&gt;:19000/status/&lt;uuid&gt;&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;method&quot;</span> <span class="o">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;body&quot;</span> <span class="o">:</span> <span class="p">{},</span>
+     <span class="s2">&quot;headers&quot;</span> <span class="o">:</span> <span class="p">{</span>
+       <span class="s2">&quot;content-type&quot;</span> <span class="o">:</span> <span class="s2">&quot;application/json&quot;</span>
+     <span class="p">},</span>
+     <span class="s2">&quot;parameters&quot;</span> <span class="o">:</span> <span class="p">{}</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;resProcessorName&quot;</span> <span class="o">:</span> <span class="s2">&quot;agentPollProcessor&quot;</span><span class="p">,</span>             <span class="c1">// bean for processing http response</span>
+ <span class="p">},</span>
+ <span class="s2">&quot;userData&quot;</span> <span class="o">:</span> <span class="p">{</span>
+   <span class="s2">&quot;serviceName&quot;</span> <span class="o">:</span> <span class="s2">&quot;myservice&quot;</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Sample agent request</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;Agent_Clean_Service&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;category&quot;</span> <span class="o">:</span> <span class="s2">&quot;agent&quot;</span><span class="p">,</span>              <span class="c1">// agent command with many fields predefined and can be skipped</span>
+  <span class="s2">&quot;httpTaskRequest&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;taskType&quot;</span> <span class="o">:</span> <span class="s2">&quot;asyncpoll&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;httpClientType&quot;</span> <span class="o">:</span> <span class="s2">&quot;httpClient&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;urlTemplate&quot;</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;url&quot;</span> <span class="o">:</span> <span class="s2">&quot;https://&lt;host&gt;:19000/services/&lt;serviceName&gt;/action/cleanup&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;method&quot;</span> <span class="o">:</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;body&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="p">},</span>
+      <span class="s2">&quot;headers&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="p">},</span>
+      <span class="s2">&quot;parameters&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;userData&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;serviceName&quot;</span> <span class="o">:</span> <span class="s2">&quot;myservice&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="manage_command.html"
+                        title="next chapter">Command</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cronusmaster/command.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="manage_command.html" title="Command"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Cronus Master</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

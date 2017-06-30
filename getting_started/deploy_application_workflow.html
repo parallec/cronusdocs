@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Deploy Application Workflow &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cronus Master" href="../cronusmaster/index.html" />
+    <link rel="prev" title="Advance Setup" href="advanced_setup.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../cronusmaster/index.html" title="Cronus Master"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="advanced_setup.html" title="Advance Setup"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Getting Started</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="deploy-application-workflow">
+<h1>Deploy Application Workflow<a class="headerlink" href="#deploy-application-workflow" title="Permalink to this headline">¶</a></h1>
+<p>This document describe steps to deploy an application to cloud by using Cronus framework.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Cronus agent and Cronus master are already installed</li>
+</ul>
+</div>
+<div class="section" id="application-packaging">
+<h2>Application Packaging<a class="headerlink" href="#application-packaging" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Checkout desired application, package and upload</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~
+git clone https://github.com/cronuspaas/cronusstacks.git
+<span class="nb">cd</span> cronusstacks/node_app
+./package.sh upload
+</pre></div>
+</div>
+<p>Expected outcome: node_app is packaged and uploaded to local CronusMaster, check <a class="reference external" href="http://localhost:9000/agent/packages">http://localhost:9000/agent/packages</a> for the uploaded package</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="deploy-and-rollback">
+<h2>Deploy and Rollback<a class="headerlink" href="#deploy-and-rollback" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Deploy</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>In CronusMaster, navigate to command -&gt; oneclick launch</li>
+<li>Run “deploy_nodeapp_local”, wait for it to complete</li>
+<li>Check for nodeapp at <a class="reference external" href="http://localhost:1337/">http://localhost:1337/</a></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">Rollback</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>You will need to deploy another version before rollback, make some change to the nodeapp code, repeat above step for packaging, upload, deploy, and verify that your change is deployed</li>
+<li>Run oneclick launch “rollback_nodeapp_local”, wait for it to complete</li>
+<li>Check the change is rolled back</li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="startup-shutdown-and-restart">
+<h2>Startup, Shutdown and Restart<a class="headerlink" href="#startup-shutdown-and-restart" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>In CronusMaster, navigate to commands -&gt; commands</li>
+<li>Run Agent_Service_LCMAction, go through command wizard, select nodegroup “Localhost”, fill in json user data of “serviceName”: “nodeapp”, “action”: “restart”, execute</li>
+<li>Wait for job to complete, click fulltext search in cmd job page to see the raw script output, note that shutdown and startup scripts are called respectively</li>
+<li>Repeat the above step for action=”shutdown”, and action=”startup”</li>
+</ul>
+</div>
+<div class="section" id="other-excercises">
+<h2>Other Excercises<a class="headerlink" href="#other-excercises" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Create a new nodegroup with list of nodes that are not localhost, install agent on them and deploy the same node application to the new nodegroup</li>
+<li>Create a recurring job that deploy latest nodeapp to localhost every 5 minutes</li>
+<li>Deploy a tomcat application to localhost, or create a new application stack ready for cronus deployment from scratch</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Deploy Application Workflow</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#application-packaging">Application Packaging</a></li>
+<li><a class="reference internal" href="#deploy-and-rollback">Deploy and Rollback</a></li>
+<li><a class="reference internal" href="#startup-shutdown-and-restart">Startup, Shutdown and Restart</a></li>
+<li><a class="reference internal" href="#other-excercises">Other Excercises</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="advanced_setup.html"
+                        title="previous chapter">Advance Setup</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../cronusmaster/index.html"
+                        title="next chapter">Cronus Master</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/getting_started/deploy_application_workflow.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../cronusmaster/index.html" title="Cronus Master"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="advanced_setup.html" title="Advance Setup"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Getting Started</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

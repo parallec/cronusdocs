@@ -1,0 +1,162 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configurations &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CronusMaster APIs" href="api.html" />
+    <link rel="prev" title="Command Log" href="log.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api.html" title="CronusMaster APIs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="log.html" title="Command Log"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Cronus Master</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configurations">
+<h1>Configurations<a class="headerlink" href="#configurations" title="Permalink to this headline">¶</a></h1>
+<p>This section explains cronus master configurations</p>
+<p><strong>Basic configurations</strong></p>
+<p>Cronus master configuration section in a sample play application.conf</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># use local file | aws_s3 | openstack_swift to store user data</span>
+agentmaster.userDataDao<span class="o">=</span>file
+agentmaster.logProgressEnabled<span class="o">=</span><span class="nb">true</span>
+
+<span class="c1"># cronusmaster public and private IP if any</span>
+agentmaster.externalIp<span class="o">=</span>some_external_ip
+agentmaster.internalIp<span class="o">=</span>some_internal_ip
+
+<span class="c1"># user data location (applicable only if use local fs for user data)</span>
+<span class="c1">#agentmaster.userDataDao.file.dir=.appdata</span>
+
+<span class="c1"># s3 related configs (applicable only if use aws_s3 for user data)</span>
+agentmaster.userDataDao.s3.myAccessKeyID<span class="o">=</span>your_access_key_id
+agentmaster.userDataDao.s3.mySecretKey<span class="o">=</span>your_secret_key
+
+<span class="c1"># swift related configs (applicable only if use swift for user data)</span>
+agentmaster.userDataDao.swift.tenantId<span class="o">=</span>your_tenant_id
+agentmaster.userDataDao.swift.tenantName<span class="o">=</span>your_tenant_name
+agentmaster.userDataDao.swift.username<span class="o">=</span>your_username
+agentmaster.userDataDao.swift.password<span class="o">=</span>your_password
+agentmaster.userDataDao.swift.authenticationUrl<span class="o">=</span>authn_url
+
+<span class="c1"># elastic search</span>
+<span class="c1"># use embedded or remote elastic search backend</span>
+agentmaster.localEsEnabled<span class="o">=</span><span class="nb">true</span>
+<span class="c1"># location of search index (applicable only if use embedded elastic search)</span>
+agentmaster.esData<span class="o">=</span>user_data/elasticsearch_data/data
+<span class="c1"># search end point (applicable only if use remote elastic search)</span>
+agentmaster.esEp<span class="o">=</span>some_search_host
+
+<span class="c1"># agent basic authentication</span>
+agentmaster.cronusagent.password<span class="o">=</span>username:password
+<span class="c1"># agent PKI authentication</span>
+agentmaster.cronusagent.pkicert<span class="o">=</span>path_to_cert
+
+<span class="c1"># ... rest of the play configuration in application.conf</span>
+</pre></div>
+</div>
+<p><strong>Configuration override for different environment</strong></p>
+<p>One can build separate application.conf.{environment} in the play conf/ directory to be used for deploying cronus master in different environment. Upon deployment time</p>
+<ol class="arabic simple">
+<li>Pass the environment value through agent deploy API call, e.g. <code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">'{...,</span> <span class="pre">&quot;env&quot;:</span> <span class="pre">&quot;prod&quot;}'</span> <span class="pre">https://host:19000/services/cronusmaster/action/deploy</span></code></li>
+<li>Agent will try to find the configuration file with .prod postfix and use it (by renaming it to application.conf)</li>
+<li>Or if the environment specific configuration file is not found, will use the default base configuration application.conf</li>
+</ol>
+<p>Same schemes work for logging configurations (log4j.properties) as well.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="log.html"
+                        title="previous chapter">Command Log</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">CronusMaster APIs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cronusmaster/configurations.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="api.html" title="CronusMaster APIs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="log.html" title="Command Log"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Cronus Master</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OneClick Launch &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Nodegroup" href="nodegroup.html" />
+    <link rel="prev" title="Command" href="manage_command.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nodegroup.html" title="Nodegroup"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="manage_command.html" title="Command"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Cronus Master</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="oneclick-launch">
+<h1>OneClick Launch<a class="headerlink" href="#oneclick-launch" title="Permalink to this headline">¶</a></h1>
+<p>Oneclick launch captures all the input necessary to launch a command job, this allows a job to be launched with “one click” (or one API call).</p>
+<p><strong>Why it is useful</strong></p>
+<ul class="simple">
+<li>Deploy or rollback applications with one click or one API call</li>
+<li>Save a job for repeated execution later</li>
+<li>Enhance automation with adaptive smart template parameters, for example can deploy latest application package to target nodes as the application package gets uploaded</li>
+</ul>
+<p><strong>Sample oneclick launch</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="p">{</span>
+ <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;deploy_pyserver_local&quot;</span><span class="p">,</span>                      <span class="c1">// unique name of the oneclick command</span>
+ <span class="s2">&quot;userData&quot;</span><span class="o">:</span> <span class="p">{</span>                                         <span class="c1">// custom user data</span>
+   <span class="s2">&quot;exe_retry&quot;</span><span class="o">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>                                   <span class="c1">// execution options</span>
+   <span class="s2">&quot;mon_retry&quot;</span><span class="o">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;thrStrategy&quot;</span><span class="o">:</span> <span class="s2">&quot;UNLIMITED&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;mon_int&quot;</span><span class="o">:</span> <span class="s2">&quot;10&quot;</span>
+   <span class="c1">// user data</span>
+   <span class="s2">&quot;var_values&quot;</span><span class="o">:</span> <span class="s2">&quot;{\&quot;serviceName\&quot;:\&quot;pyserver\&quot;,\&quot;package\&quot;:[\&quot;http://&lt;cmInternalIp&gt;:9000/agent/downloadPkg/&lt;pyserver-.*.all.cronus.latest&gt;\&quot;]}&quot;</span><span class="p">,</span>
+ <span class="p">},</span>
+ <span class="s2">&quot;commandKey&quot;</span><span class="o">:</span> <span class="s2">&quot;Agent_Deploy_Service&quot;</span><span class="p">,</span>                 <span class="c1">// command name</span>
+ <span class="s2">&quot;nodeGroupKey&quot;</span><span class="o">:</span> <span class="s2">&quot;LOCALHOST&quot;</span>                           <span class="c1">// nodegroup name</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Create oneclick launch</strong></p>
+<p>Oneclick launch can be created in two ways</p>
+<ol class="arabic simple">
+<li>From command log tab, save an already executed command job as oneclick launch</li>
+<li>From oneclick launch tab, create by cloning an existing oneclick launch</li>
+</ol>
+<p><strong>Smart template parameters</strong></p>
+<p>The following smart template parameters can be used in oneclick launch to allow greater degree of reusability</p>
+<ul class="simple">
+<li>&lt;cmExternalIp&gt;: reference public IP of the cronus master, value defined in cronusmaster config file</li>
+<li>&lt;cmInternalIp&gt;: reference private IP of the cronus master, value defined in cronusmaster config file</li>
+<li>&lt;service-.*.platform.cronus.latest&gt;: reference latest uploaded package for a service, for example &lt;pyserver-.*.all.cronus.latest&gt; is the latest version of the pyserver package, &lt;pyserver-1.*.all.cronus.latest&gt; is the latest version of 1.x.y of the pyserver package</li>
+</ul>
+<p>With smart template parameters, one can create an oneclick launch to deploy latest application package to a group of nodes, without having to change anything in the oneclick launch.</p>
+<p><strong>Run oneclick</strong></p>
+<p>Run from “oneclick launch” tab with a single click, or one API call, redirect to command job log page upon successful launch.</p>
+<p>oneclick launch summary</p>
+<img alt="../_images/oneclick_launch.png" src="../_images/oneclick_launch.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="manage_command.html"
+                        title="previous chapter">Command</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nodegroup.html"
+                        title="next chapter">Nodegroup</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cronusmaster/oneclick_command.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nodegroup.html" title="Nodegroup"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="manage_command.html" title="Command"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Cronus Master</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

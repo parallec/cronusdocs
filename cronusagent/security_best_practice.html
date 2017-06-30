@@ -1,0 +1,133 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Security Best Practice &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Agent API List" href="agent_api.html" />
+    <link rel="prev" title="Agent Upgrade" href="agent_upgrade.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="agent_api.html" title="Agent API List"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="agent_upgrade.html" title="Agent Upgrade"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Cronus Agent</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="security-best-practice">
+<h1>Security Best Practice<a class="headerlink" href="#security-best-practice" title="Permalink to this headline">¶</a></h1>
+<p><strong>Why:</strong></p>
+<ul class="simple">
+<li>Agent has elevated access to resource required by its workload</li>
+<li>Agent is mission critical service, interference is not desirable</li>
+<li>Agents are deployed everywhere in target infrastructure</li>
+</ul>
+<p><strong>Existing Agent Security Mechanisms:</strong></p>
+<ul class="simple">
+<li>All traffic through agent API on HTTPS</li>
+<li>Basic HTTP authentication or PKI based authentication</li>
+<li>Separation of agent user and app user, application managed by agent does not have same privilege as agent has</li>
+<li>Agent and app users are setup as system accounts with login disabled</li>
+</ul>
+<p><strong>Security Best Practice:</strong></p>
+<ul class="simple">
+<li>Do not enable access to agent API from internet without any restriction. It’s best to only allow access from intranet via cronusmaster, or if that’s not feasible, only allow access from internet from trusted IPs</li>
+<li>Do NOT use default SSL certs when install agent, always provide your own certs</li>
+<li>Do NOT leave agent API open without authentication, at least set basic auth with your own user:password</li>
+<li>Do NOT keep your credentials in your source code, or encrypt it with your private key</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="agent_upgrade.html"
+                        title="previous chapter">Agent Upgrade</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="agent_api.html"
+                        title="next chapter">Agent API List</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cronusagent/security_best_practice.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="agent_api.html" title="Agent API List"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="agent_upgrade.html" title="Agent Upgrade"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Cronus Agent</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

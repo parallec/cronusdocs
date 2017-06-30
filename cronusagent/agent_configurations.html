@@ -1,0 +1,153 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Agent Configuration &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How-tos and Demos" href="../demos/index.html" />
+    <link rel="prev" title="Agent API List" href="agent_api.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../demos/index.html" title="How-tos and Demos"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="agent_api.html" title="Agent API List"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Cronus Agent</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="agent-configuration">
+<h1>Agent Configuration<a class="headerlink" href="#agent-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Agent configurations and default values, configurations can be override through API call</p>
+<p><strong>Agent Configurations</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">agent_health_report_interval</span><span class="o">=</span><span class="m">120</span>               <span class="c1"># interval when agent health is checked</span>
+<span class="nv">agent_thread_timeout</span><span class="o">=</span><span class="m">600</span>                       <span class="c1"># agent thread timeout</span>
+<span class="nv">app_restart_init_delay</span><span class="o">=</span><span class="m">15</span>                      <span class="c1"># artificial delay before agent starts services after system reboot</span>
+<span class="nv">download_skip_prop</span><span class="o">=</span><span class="nb">true</span>                        <span class="c1"># not require cronus prop file</span>
+<span class="nv">download_thread_attempt</span><span class="o">=</span><span class="m">1</span>                      <span class="c1"># download retry</span>
+<span class="nv">download_thread_max_time</span><span class="o">=</span><span class="m">7200</span>                  <span class="c1"># download timeout ceiling</span>
+<span class="nv">download_thread_min_progress_time</span><span class="o">=</span><span class="m">10</span>           <span class="c1"># download progress timeout</span>
+<span class="nv">download_thread_min_time</span><span class="o">=</span><span class="m">60</span>                    <span class="c1"># download timeout floor</span>
+<span class="nv">download_thread_rate_per_sec</span><span class="o">=</span><span class="m">102400</span>            <span class="c1"># download rate throttle</span>
+<span class="nv">exec_thread_progress_timeout</span><span class="o">=</span><span class="m">60</span>                <span class="c1"># task execution thread progress timeout</span>
+<span class="nv">exec_thread_sleep_time</span><span class="o">=</span><span class="m">1</span>                       <span class="c1"># interval when check task execution progress</span>
+<span class="nv">exec_thread_timeout</span><span class="o">=</span><span class="m">600</span>                        <span class="c1"># task execution thread timeout</span>
+<span class="nv">health_agent_file_descriptor_usage_threshold</span><span class="o">=</span><span class="m">500</span> <span class="c1"># max number of file descriptor</span>
+<span class="nv">health_agent_mem_usage_threshold</span><span class="o">=</span><span class="m">200000</span>        <span class="c1"># max memory</span>
+<span class="nv">health_disk_usage_gc_buffer</span><span class="o">=</span><span class="m">20</span>                 <span class="c1"># agent disk percentage for gc</span>
+<span class="nv">health_disk_usage_gc_threshold</span><span class="o">=</span><span class="m">70</span>              <span class="c1"># agent disk percentage threshold for gc</span>
+<span class="nv">health_disk_usage_percent_threshold</span><span class="o">=</span><span class="m">90</span>         <span class="c1"># max disk usage percentage</span>
+<span class="nv">keep_past_manifests</span><span class="o">=</span><span class="m">3</span>                          <span class="c1"># how many past manifest to keep</span>
+<span class="nv">monitor_check_timeinterval</span><span class="o">=</span><span class="m">120</span>                 <span class="c1"># application monitoring interval</span>
+<span class="nv">monitor_probation_enabled</span><span class="o">=</span><span class="nb">true</span>                 <span class="c1"># probation for application monitoring script</span>
+<span class="nv">monitor_publish_enabled</span><span class="o">=</span><span class="nb">false</span>                  <span class="c1"># whether to publish application monitoring data</span>
+<span class="nv">packageMgr_garbage_freq</span><span class="o">=</span><span class="m">1800</span>                   <span class="c1"># agent gc interval in seconds</span>
+<span class="nv">packageMgr_install_package_age</span><span class="o">=</span><span class="m">43200</span>           <span class="c1"># agent package gc max age for installed package</span>
+<span class="nv">packageMgr_install_package_min_age</span><span class="o">=</span><span class="m">7200</span>        <span class="c1"># agent package gc min age for installed package (shorter than this is not subject to gc)</span>
+<span class="nv">packageMgr_package_age</span><span class="o">=</span><span class="m">86400</span>                   <span class="c1"># agent package gc max age for downloaded package</span>
+<span class="nv">packageMgr_package_min_age</span><span class="o">=</span><span class="m">7200</span>                <span class="c1"># agent package gc min age for downloaded package (shorter than this is not subject to gc)</span>
+<span class="nv">pkiauth_enabled</span><span class="o">=</span><span class="nb">false</span>                          <span class="c1"># pki auth</span>
+<span class="nv">safeshutdown_busy_check_timeout</span><span class="o">=</span><span class="m">86400</span>          <span class="c1"># timeout checking for safe shutdown</span>
+<span class="nv">skip_cleanup_on_failure</span><span class="o">=</span><span class="nb">false</span>                  <span class="c1"># skip cleanup when deploy application failure</span>
+<span class="nv">system_restart_time_threshold</span><span class="o">=</span><span class="m">300</span>              <span class="c1"># system uptime check for system reboot</span>
+<span class="nv">threadMgr_garbage_freq</span><span class="o">=</span><span class="m">60</span>                      <span class="c1"># agent thread gc interval</span>
+<span class="nv">threadMgr_thread_age</span><span class="o">=</span><span class="m">3600</span>                      <span class="c1"># agent thread age for gc</span>
+</pre></div>
+</div>
+<p><strong>Override Configuration</strong></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>curl -k -X POST -d <span class="s1">&#39;{&quot;configs&quot;: {&quot;&lt;configName&gt;&quot;: &quot;&lt;configValue&gt;&quot;}}&#39;</span> https://host:19000/agent/config
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="agent_api.html"
+                        title="previous chapter">Agent API List</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../demos/index.html"
+                        title="next chapter">How-tos and Demos</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cronusagent/agent_configurations.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../demos/index.html" title="How-tos and Demos"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="agent_api.html" title="Agent API List"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Cronus Agent</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Command &#8212; cronus 0.1.45 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.45',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OneClick Launch" href="oneclick_command.html" />
+    <link rel="prev" title="Command Template" href="command.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="oneclick_command.html" title="OneClick Launch"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="command.html" title="Command Template"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Cronus Master</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="command">
+<h1>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h1>
+<p><strong>Create command</strong></p>
+<ol class="arabic simple">
+<li>Command can be created in two ways<ul>
+<li>Create from scratch</li>
+<li>Clone from an existing command</li>
+</ul>
+</li>
+<li>Define command type<ul>
+<li>async: request with reponse as the result</li>
+<li>asyncpoll: request followed by polling to get result</li>
+</ul>
+</li>
+<li>Fill in the command template with http request values, similar to defining http request in RESTful client like POSTMAN</li>
+<li>Define template parameter; template parameter can be used in all http reuqest values, template parameter is identified by “&lt;&gt;”, minimally if the command can be executed against different hosts, “&lt;host&gt;” needs to be part of the url value. Template parameters will be replace with real values at execution time, or if values are not provided, the parameters will be skipped.</li>
+<li>Define user data, it will be used to drive command launch wizard</li>
+</ol>
+<p>edit command</p>
+<img alt="../_images/command_edit.png" src="../_images/command_edit.png" />
+<p><strong>Modify command</strong></p>
+<p>Except the name, which is immutable, data of the command can be modified</p>
+<p><strong>Delete command</strong></p>
+<p>Delete command from persistent store</p>
+<p>command summary page</p>
+<img alt="../_images/command_summary.png" src="../_images/command_summary.png" />
+<p><strong>Run command</strong></p>
+<p>Run command will launch command wizard</p>
+<ul class="simple">
+<li>wizard screen 1: customize command with execution options, user data</li>
+<li>wizard screen 2: select nodegroup against which command will be run</li>
+<li>wizard screen 3: confirm and launch command job, job progress and result can be found in command job log.</li>
+</ul>
+<p>wizard screen 1</p>
+<img alt="../_images/command_wizard_1.png" src="../_images/command_wizard_1.png" />
+<p>wizard screen 2</p>
+<img alt="../_images/command_wizard_2.png" src="../_images/command_wizard_2.png" />
+<p>wizard screen 3</p>
+<img alt="../_images/command_wizard_3.png" src="../_images/command_wizard_3.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="command.html"
+                        title="previous chapter">Command Template</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="oneclick_command.html"
+                        title="next chapter">OneClick Launch</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cronusmaster/manage_command.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="oneclick_command.html" title="OneClick Launch"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="command.html" title="Command Template"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">cronus 0.1.45 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Cronus Master</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, binyu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
